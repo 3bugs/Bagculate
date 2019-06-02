@@ -9,15 +9,38 @@ public class Object {
     @SerializedName("name")
     public final String name;
     @SerializedName("type")
-    public final int type;
+    public final String type;
     @SerializedName("weight")
-    public final double weight;
+    public final int weight;
 
-    public Object(int id, String name, int type, double weight) {
+    private int count = 0;
+
+    public Object(int id, String name, String type, int weight) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.weight = weight;
+    }
+
+    public int getCount() {
+        return this.count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    public void increaseCount() {
+        this.count++;
+    }
+
+    public boolean decreaseCount() {
+        this.count--;
+        if (this.count < 0) {
+            this.count = 0;
+            return false;
+        }
+        return true;
     }
 
     @Override

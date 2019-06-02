@@ -26,4 +26,8 @@ public interface WebServices {
     @GET("get_bag")
     Call<GetBagResponse> getBag(
     );
+
+    @GET("get_object")
+    Call<GetObjectResponse> getObject(
+    );
 }

@@ -6,27 +6,37 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import th.ac.dusit.dbizcom.bagculate.etc.Utils;
 import th.ac.dusit.dbizcom.bagculate.fragment.BagFragment;
 import th.ac.dusit.dbizcom.bagculate.fragment.ObjectFragment;
 import th.ac.dusit.dbizcom.bagculate.fragment.ObjectListFragment;
+import th.ac.dusit.dbizcom.bagculate.fragment.SummaryFragment;
 import th.ac.dusit.dbizcom.bagculate.model.Bag;
+import th.ac.dusit.dbizcom.bagculate.model.Object;
+import th.ac.dusit.dbizcom.bagculate.model.ObjectType;
 
 public class MenuActivity extends AppCompatActivity implements
         BagFragment.BagFragmentListener,
         ObjectFragment.ObjectFragmentListener,
-        ObjectListFragment.ObjectListFragmentListener {
+        ObjectListFragment.ObjectListFragmentListener,
+        SummaryFragment.SummaryFragmentListener {
 
     public static final String TAG_FRAGMENT_BAG = "bag_fragment";
     public static final String TAG_FRAGMENT_OBJECT = "object_fragment";
-    public static final String TAG_FRAGMENT_OBJECT_LIST = "object_fragment_list";
+    public static final String TAG_FRAGMENT_OBJECT_LIST = "object_list_fragment";
+    public static final String TAG_FRAGMENT_SUMMARY = "summary_fragment";
 
     BottomNavigationView mNavView;
 
     private Bag mSelectedBag = null;
+    private final List<Object> mObjectListInBag = new ArrayList<>();
 
     protected enum FragmentTransitionType {
         NONE,
@@ -50,12 +60,17 @@ public class MenuActivity extends AppCompatActivity implements
                     loadFragment(
                             new ObjectFragment(),
                             TAG_FRAGMENT_OBJECT,
-                            true,
+                            false,
                             FragmentTransitionType.SLIDE
                     );
                     return true;
                 case R.id.nav_list:
-                    //todo:
+                    loadFragment(
+                            new SummaryFragment(),
+                            TAG_FRAGMENT_SUMMARY,
+                            false,
+                            FragmentTransitionType.SLIDE
+                    );
                     return true;
                 case R.id.nav_history:
                     //todo:
@@ -128,7 +143,7 @@ public class MenuActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void onClickObjectTypeImage(int objectType) {
+    public void onClickObjectTypeImage(ObjectType objectType) {
         loadFragment(
                 ObjectListFragment.newInstance(objectType),
                 TAG_FRAGMENT_OBJECT_LIST,
@@ -148,5 +163,37 @@ public class MenuActivity extends AppCompatActivity implements
                 FragmentTransitionType.SLIDE
         );*/
         mNavView.setSelectedItemId(R.id.nav_object);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setTitle(title);
+        }
+    }
+
+    @Override
+    public Bag getSelectedBag() {
+        return mSelectedBag;
+    }
+
+    @Override
+    public List<Object> getObjectListInBag() {
+        return mObjectListInBag;
+    }
+
+    @Override
+    public void addObjectIntoBag(Object object) {
+        boolean exist = false;
+        for (Object o : mObjectListInBag) {
+            if (o.id == object.id) {
+                exist = true;
+                o.setCount(object.getCount());
+            }
+        }
+        if (!exist) {
+            mObjectListInBag.add(object);
+        }
     }
 }

@@ -84,8 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                         User user = responseBody.user;
                         Utils.showLongToast(LoginActivity.this, "ยินดีต้อนรับ " + user.name);
 
-                        // ส่ง username ที่ register สำเร็จ กลับไปแสดงในหน้า login
-
+                        Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override

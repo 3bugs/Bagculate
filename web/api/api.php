@@ -62,7 +62,7 @@ function doLogin()
     $username = $db->real_escape_string($_POST['username']);
     $password = $db->real_escape_string($_POST['password']);
 
-    $selectUserSql = "SELECT * FROM `user` WHERE `username` = '$username' AND `password` = '$password'";
+    $selectUserSql = "SELECT * FROM `bagculate_user` WHERE `username` = '$username' AND `password` = '$password'";
 
     $selectUserResult = $db->query($selectUserSql);
     if ($selectUserResult) {
@@ -122,7 +122,7 @@ function doRegister()
     $password = $db->real_escape_string($_POST['password']);
     $name = $db->real_escape_string($_POST['name']);
 
-    $selectExistingUserSQL = "SELECT * FROM `user` WHERE `username` = '$username'";
+    $selectExistingUserSQL = "SELECT * FROM `bagculate_user` WHERE `username` = '$username'";
     $selectExistingUserResult = $db->query($selectExistingUserSQL);
     if ($selectExistingUserResult->num_rows > 0) {
         $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
@@ -133,12 +133,12 @@ function doRegister()
     }
     $selectExistingUserResult->close();
 
-    $insertUserSql = "INSERT INTO `user` (`username`, `password`, `name`) "
+    $insertUserSql = "INSERT INTO `bagculate_user` (`username`, `password`, `name`) "
         . " VALUES ('$username', '$password', '$name')";
     $insertUserResult = $db->query($insertUserSql);
     if ($insertUserResult) {
         $insertId = $db->insert_id;
-        $selectUserSql = "SELECT * FROM `user` WHERE `id` = $insertId";
+        $selectUserSql = "SELECT * FROM `bagculate_user` WHERE `id` = $insertId";
 
         $selectUserResult = $db->query($selectUserSql);
         if ($selectUserResult) {
@@ -159,7 +159,7 @@ function doGetBag()
 {
     global $db, $response;
 
-    $sql = "SELECT * FROM `bag`";
+    $sql = "SELECT * FROM `bagculate_bag`";
     if ($result = $db->query($sql)) {
         $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
         $response[KEY_ERROR_MESSAGE] = 'อ่านข้อมูลสำเร็จ';
@@ -188,23 +188,23 @@ function doGetObject()
 {
     global $db, $response;
 
-    $sql = "SELECT * FROM `object`";
+    $sql = "SELECT * FROM `bagculate_object` ORDER BY type, name";
     if ($result = $db->query($sql)) {
         $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
         $response[KEY_ERROR_MESSAGE] = 'อ่านข้อมูลสำเร็จ';
         $response[KEY_ERROR_MESSAGE_MORE] = '';
 
-        $bagList = array();
+        $objectList = array();
         while ($row = $result->fetch_assoc()) {
-            $bag = array();
-            $bag['id'] = (int)$row['id'];
-            $bag['name'] = $row['name'];
-            $bag['type'] = (int)$row['type'];
-            $bag['weight'] = floatval($row['weight']);
-            array_push($bagList, $bag);
+            $object = array();
+            $object['id'] = (int)$row['id'];
+            $object['name'] = $row['name'];
+            $object['type'] = $row['type'];
+            $object['weight'] = floatval($row['weight']);
+            array_push($objectList, $object);
         }
         $result->close();
-        $response[KEY_DATA_LIST] = $bagList;
+        $response[KEY_DATA_LIST] = $objectList;
     } else {
         $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
         $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการอ่านข้อมูล';
