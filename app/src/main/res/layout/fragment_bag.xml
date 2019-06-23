@@ -32,7 +32,7 @@
             android:checked="true"
             android:gravity="center"
             android:padding="8dp"
-            android:text="ประเป๋าสะพาย"/>
+            android:text="กระเป๋าสะพาย"/>
 
         <RadioButton
             android:id="@+id/bag_type_1_radio_button"

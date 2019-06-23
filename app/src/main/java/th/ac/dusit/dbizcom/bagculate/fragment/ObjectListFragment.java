@@ -249,19 +249,19 @@ public class ObjectListFragment extends Fragment implements View.OnDragListener 
             int imageResource = -1;
             switch (mObjectType.type) {
                 case ObjectType.TYPE_SHIRT:
-                    imageResource = R.drawable.ic_shirt;
+                    imageResource = R.drawable.ic_type_shirt;
                     break;
                 case ObjectType.TYPE_PANTS:
-                    imageResource = R.drawable.ic_pants;
+                    imageResource = R.drawable.ic_type_pants;
                     break;
                 case ObjectType.TYPE_SHOES:
-                    imageResource = R.drawable.ic_shoes;
+                    imageResource = R.drawable.ic_type_shoes;
                     break;
                 case ObjectType.TYPE_THING:
-                    //imageResource = R.drawable.ic_shirt;
+                    imageResource = R.drawable.ic_type_thing;
                     break;
                 case ObjectType.TYPE_ETC:
-                    //imageResource = R.drawable.ic_shirt;
+                    imageResource = R.drawable.ic_type_etc;
                     break;
             }
             if (imageResource != -1) {
