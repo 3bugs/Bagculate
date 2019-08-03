@@ -12,14 +12,15 @@ public class Object {
     public final String type;
     @SerializedName("weight")
     public final int weight;
+    @SerializedName("count")
+    public int count;
 
-    private int count = 0;
-
-    public Object(int id, String name, String type, int weight) {
+    public Object(int id, String name, String type, int weight, int count) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.weight = weight;
+        this.count = count;
     }
 
     public int getCount() {

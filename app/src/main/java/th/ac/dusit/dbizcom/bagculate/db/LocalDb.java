@@ -13,35 +13,25 @@ public class LocalDb {
     private static final String TAG = LocalDb.class.getName();
     public static final String STORED_DATE_FORMAT = "yyyy-MM-dd";
 
-    private static final String DATABASE_NAME = "smart_pick.db";
+    private static final String DATABASE_NAME = "bagculate.db";
     private static final int DATABASE_VERSION = 1;
 
     // เทเบิล user
-    // +-----+---------+----------+------+----------+--------+---------+------------+
-    // | _id | user_id | username | name | lastname | school | program | created_at |
-    // +-----+---------+----------+------+----------+--------+---------+------------+
-    // |     |         |          |      |          |        |         |            |
+    // +-----+----------+------+
+    // | _id | username | name |
+    // +-----+----------+------+
+    // |     |          |      |
 
     private static final String TABLE_USER = "user";
     private static final String COL_ID = "_id";
-    private static final String COL_USER_ID = "user_id";
     private static final String COL_USERNAME = "username";
     private static final String COL_NAME = "name";
-    private static final String COL_LAST_NAME = "lastname";
-    private static final String COL_SCHOOL = "school";
-    private static final String COL_PROGRAM = "program";
-    private static final String COL_CREATED_AT = "created_at";
 
     private static final String SQL_CREATE_TABLE_USER =
             "CREATE TABLE " + TABLE_USER + "("
                     + COL_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    + COL_USER_ID + " INTEGER, "
                     + COL_USERNAME + " TEXT, "
-                    + COL_NAME + " TEXT, "
-                    + COL_LAST_NAME + " TEXT, "
-                    + COL_SCHOOL + " TEXT, "
-                    + COL_PROGRAM + " TEXT, "
-                    + COL_CREATED_AT + " TEXT "
+                    + COL_NAME + " TEXT "
                     + ")";
 
     private static DatabaseHelper sDbHelper;
@@ -57,20 +47,16 @@ public class LocalDb {
         mDatabase = sDbHelper.getWritableDatabase();
     }
 
-    /*public boolean logUser(User user) {
+    public boolean logUser(User user) {
         clearUser();
         ContentValues cv = new ContentValues();
-        cv.put(COL_USER_ID, user.id);
+        cv.put(COL_ID, user.id);
         cv.put(COL_USERNAME, user.username);
         cv.put(COL_NAME, user.name);
-        cv.put(COL_LAST_NAME, user.lastname);
-        cv.put(COL_SCHOOL, user.school);
-        cv.put(COL_PROGRAM, user.program);
-        cv.put(COL_CREATED_AT, user.createdAt);
         return mDatabase.insert(TABLE_USER, null, cv) != -1;
-    }*/
+    }
 
-    /*public int clearUser() {
+    public int clearUser() {
         return mDatabase.delete(TABLE_USER, null, null);
     }
 
@@ -90,18 +76,14 @@ public class LocalDb {
         } else {
             cursor.moveToFirst();
             User user = new User(
-                    cursor.getInt(cursor.getColumnIndex(COL_USER_ID)),
+                    cursor.getInt(cursor.getColumnIndex(COL_ID)),
                     cursor.getString(cursor.getColumnIndex(COL_USERNAME)),
-                    cursor.getString(cursor.getColumnIndex(COL_NAME)),
-                    cursor.getString(cursor.getColumnIndex(COL_LAST_NAME)),
-                    cursor.getString(cursor.getColumnIndex(COL_SCHOOL)),
-                    cursor.getString(cursor.getColumnIndex(COL_PROGRAM)),
-                    cursor.getString(cursor.getColumnIndex(COL_CREATED_AT))
+                    cursor.getString(cursor.getColumnIndex(COL_NAME))
             );
             cursor.close();
             return user;
         }
-    }*/
+    }
 
     private static class DatabaseHelper extends SQLiteOpenHelper {
 

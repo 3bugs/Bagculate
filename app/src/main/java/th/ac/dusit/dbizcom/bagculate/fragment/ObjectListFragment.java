@@ -94,6 +94,14 @@ public class ObjectListFragment extends Fragment implements View.OnDragListener 
 
         mBagFab = view.findViewById(R.id.bag_fab);
         mBagFab.setOnDragListener(this);
+        mBagFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mListener != null) {
+                    mListener.onClickBagFab();
+                }
+            }
+        });
     }
 
     @Override
@@ -199,6 +207,8 @@ public class ObjectListFragment extends Fragment implements View.OnDragListener 
         List<Object> getObjectListInBag();
 
         void addObjectIntoBag(Object object);
+
+        void onClickBagFab();
     }
 
     private static class ObjectListAdapter extends RecyclerView.Adapter<ObjectListAdapter.ObjectViewHolder> {

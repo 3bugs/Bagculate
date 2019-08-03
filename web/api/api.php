@@ -44,6 +44,12 @@ switch ($action) {
     case 'get_object':
         doGetObject();
         break;
+    case 'get_history':
+        doGetHistory();
+        break;
+    case 'add_history':
+        doAddHistory();
+        break;
     default:
         $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
         $response[KEY_ERROR_MESSAGE] = 'No action specified or invalid action.';
@@ -212,4 +218,105 @@ function doGetObject()
         $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
     }
 }
+
+function doGetHistory()
+{
+    global $db, $response;
+
+    $userId = $db->real_escape_string($_POST['user_id']);
+
+    $sql = "SELECT h.id, h.created_at, b.name, b.type, b.weight FROM bagculate_history h INNER JOIN bagculate_bag b ON h.bag_id = b.id WHERE user_id = $userId ORDER BY created_at DESC";
+    if ($result = $db->query($sql)) {
+        $historyList = array();
+        while ($row = $result->fetch_assoc()) {
+            $history = array();
+            $historyId = (int)$row['id'];
+            $history['id'] = $historyId;
+            $history['created_at'] = $row['created_at'];
+            $history['bag'] = array(
+                'name' => $row['name'],
+                'type' => (int)$row['type'],
+                'weight' => floatval($row['weight'])
+            );
+            $history['object_list'] = array();
+
+            $sql = "SELECT o.name, o.type, o.weight, hd.count FROM bagculate_history_details hd INNER JOIN bagculate_object o ON hd.object_id = o.id WHERE history_id = $historyId";
+            if ($objectResult = $db->query($sql)) {
+                $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+                $response[KEY_ERROR_MESSAGE] = 'อ่านข้อมูลสำเร็จ';
+                $response[KEY_ERROR_MESSAGE_MORE] = '';
+
+                while ($objectRow = $objectResult->fetch_assoc()) {
+                    $object = array();
+                    $object['name'] = $objectRow['name'];
+                    $object['type'] = $objectRow['type'];
+                    $object['weight'] = floatval($objectRow['weight']);
+                    $object['count'] = (int)$objectRow['count'];
+
+                    array_push($history['object_list'], $object);
+                }
+                $objectResult->close();
+            } else {
+                $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+                $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการอ่านข้อมูล (2)';
+                $errMessage = $db->error;
+                $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+                return;
+            }
+
+            array_push($historyList, $history);
+        }
+        $result->close();
+        $response[KEY_DATA_LIST] = $historyList;
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการอ่านข้อมูล (1)';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+    }
+}
+
+function doAddHistory()
+{
+    global $db, $response;
+
+    $userId = $db->real_escape_string($_POST['user_id']);
+    $bagId = $db->real_escape_string($_POST['bag_id']);
+    $objectList = $db->real_escape_string($_POST['object_list']);
+
+    $sql = "INSERT INTO bagculate_history (user_id, bag_id) VALUES ($userId, $bagId)";
+    if ($result = $db->query($sql)) {
+        $insertId = $db->insert_id;
+
+        $objectList = explode(',', $objectList);
+        $valueList = "";
+        foreach ($objectList as $object) {
+            $objectPart = explode('-', $object);
+            $objectId = $objectPart[0];
+            $count = $objectPart[1];
+
+            $valueList .= "($insertId, $objectId, $count),";
+        }
+        $valueList = substr($valueList, 0, -1);
+
+        $insertObjectListSql = "INSERT INTO bagculate_history_details (history_id, object_id, count) 
+                                VALUES $valueList";
+        if ($db->query($insertObjectListSql)) {
+            $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+            $response[KEY_ERROR_MESSAGE] = 'บันทึกข้อมูลสำเร็จ';
+            $response[KEY_ERROR_MESSAGE_MORE] = '';
+        } else {
+            $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+            $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล (2)';
+            $errMessage = $db->error;
+            $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $insertObjectListSql";
+        }
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล (1)';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+    }
+}
+
 ?>

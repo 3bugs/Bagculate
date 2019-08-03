@@ -2,27 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8639df29-90e3-43c6-b38e-291d3614b1a6" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/db/LocalDb.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/ic_type_etc.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/ic_type_pants.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/ic_type_shirt.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/ic_type_shoes.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/ic_type_thing.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/image_slide_01.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/image_slide_02.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/image_slide_03.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/image_slide_04.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/HistoryFragment.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/History.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/AddHistoryResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/GetHistoryResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_save.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_history.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_history.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../app/build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MainActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/db/LocalDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/db/LocalDb.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/ObjectListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/ObjectListFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_bag.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_bag.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_object.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_object.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_object.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_object.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/SummaryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/SummaryFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/Object.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/ApiClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/WebServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/WebServices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/image_slide_03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/image_slide_03.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/bg_radio_bag_type_normal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable/bg_radio_bag_type_normal.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_summary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_summary.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/menu/bottom_nav_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/menu/bottom_nav_menu.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -49,79 +53,25 @@
     <expand />
     <select />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/db_config.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/create_table.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="420">
-              <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/api/api.php">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2566">
-              <caret line="206" column="47" selection-start-line="206" selection-start-column="47" selection-end-line="206" selection-end-column="47" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/api/db_config.php" />
-        <option value="$PROJECT_DIR$/api/create_table.php" />
-        <option value="$PROJECT_DIR$/api/api.php" />
-      </list>
-    </option>
-  </component>
-  <component name="PhpServers">
-    <servers />
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="111" />
-    <option name="y" value="192" />
-    <option name="width" value="1378" />
-    <option name="height" value="745" />
-  </component>
+  <component name="ProjectId" id="1OuA9ElkIXCdGnlNpG1lZTzVmTe" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane" />
-      <pane id="Scope" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MariaDB" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -154,66 +104,23 @@
       <workItem from="1558541734975" duration="8000" />
       <workItem from="1558660555407" duration="4000" />
       <workItem from="1559449690663" duration="1769000" />
-      <workItem from="1561273535004" duration="702000" />
+      <workItem from="1561273535004" duration="1323000" />
+      <workItem from="1564816957325" duration="5786000" />
     </task>
     <servers />
-  </component>
-  <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="8880000" />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="65" y="-4" width="1855" height="1084" extended-state="6" />
-    <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18186843" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info anchor="bottom" id="Version Control" order="10" />
-      <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" />
-      <window_info anchor="right" id="Quick Notes" />
-      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Database" order="3" visible="true" weight="0.1779989" />
-    </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/global.php">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/0eac1d4b-e640-4b29-a72a-2264bf0caf8a/console.sql" />
-    <entry file="file://$PROJECT_DIR$/api/db_config.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/create_table.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="27" selection-start-line="20" selection-start-column="27" selection-end-line="20" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2566">
-          <caret line="206" column="47" selection-start-line="206" selection-start-column="47" selection-end-line="206" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

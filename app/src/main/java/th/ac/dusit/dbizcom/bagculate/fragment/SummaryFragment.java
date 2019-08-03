@@ -1,10 +1,12 @@
 package th.ac.dusit.dbizcom.bagculate.fragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,17 +16,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 import java.util.Locale;
 
+import retrofit2.Call;
+import retrofit2.Retrofit;
+import th.ac.dusit.dbizcom.bagculate.LoginActivity;
+import th.ac.dusit.dbizcom.bagculate.MenuActivity;
 import th.ac.dusit.dbizcom.bagculate.R;
+import th.ac.dusit.dbizcom.bagculate.db.LocalDb;
+import th.ac.dusit.dbizcom.bagculate.etc.Utils;
 import th.ac.dusit.dbizcom.bagculate.model.Bag;
 import th.ac.dusit.dbizcom.bagculate.model.Object;
 import th.ac.dusit.dbizcom.bagculate.model.ObjectType;
+import th.ac.dusit.dbizcom.bagculate.model.User;
+import th.ac.dusit.dbizcom.bagculate.net.AddHistoryResponse;
+import th.ac.dusit.dbizcom.bagculate.net.ApiClient;
+import th.ac.dusit.dbizcom.bagculate.net.LoginResponse;
+import th.ac.dusit.dbizcom.bagculate.net.MyRetrofitCallback;
+import th.ac.dusit.dbizcom.bagculate.net.WebServices;
 
 public class SummaryFragment extends Fragment {
+
+    private FloatingActionButton mSaveFab;
+    private ProgressBar mProgressBar;
 
     private SummaryFragmentListener mListener;
 
@@ -62,6 +81,74 @@ public class SummaryFragment extends Fragment {
             objectRecyclerView.addItemDecoration(new SummaryFragment.SpacingDecoration(getContext()));
             objectRecyclerView.setAdapter(adapter);
         }
+
+        mProgressBar = view.findViewById(R.id.progress_bar);
+        mSaveFab = view.findViewById(R.id.save_history_fab);
+        mSaveFab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doSaveHistory();
+            }
+        });
+    }
+
+    private void doSaveHistory() {
+        if (getActivity() == null) return;
+
+        MenuActivity activity = (MenuActivity) getActivity();
+
+        LocalDb localDb = new LocalDb(getActivity());
+        User user = localDb.getUser();
+        if (user == null) {
+            Toast.makeText(getActivity(), "ยังไม่ได้ login", Toast.LENGTH_SHORT).show();
+        } else {
+            mProgressBar.setVisibility(View.VISIBLE);
+
+            Retrofit retrofit = ApiClient.getClient();
+            WebServices services = retrofit.create(WebServices.class);
+
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < activity.getObjectListInBag().size(); i++) {
+                Object object = activity.getObjectListInBag().get(i);
+                sb.append(object.id).append("-").append(object.getCount());
+                if (i < activity.getObjectListInBag().size() - 1) {
+                    sb.append(",");
+                }
+            }
+
+            Call<AddHistoryResponse> call = services.addHistory(
+                    user.id,
+                    activity.getSelectedBag().id,
+                    sb.toString()
+            );
+            call.enqueue(new MyRetrofitCallback<>(
+                    getActivity(),
+                    null,
+                    null,
+                    new MyRetrofitCallback.MyRetrofitCallbackListener<AddHistoryResponse>() {
+                        @Override
+                        public void onSuccess(AddHistoryResponse responseBody) {
+                            mProgressBar.setVisibility(View.GONE);
+                            String successMessage = responseBody.errorMessage;
+                            Utils.showLongToast(getActivity(), successMessage);
+
+                            if (mListener != null) {
+                                mListener.onSaveHistory();
+                            }
+                        }
+
+                        @Override
+                        public void onError(String errorMessage) {
+                            mProgressBar.setVisibility(View.GONE);
+                            Utils.showOkDialog(
+                                    getActivity(),
+                                    "Error",
+                                    errorMessage
+                            );
+                        }
+                    }
+            ));
+        }
     }
 
     @Override
@@ -97,7 +184,7 @@ public class SummaryFragment extends Fragment {
 
         List<Object> getObjectListInBag();
 
-        void addObjectIntoBag(Object object);
+        void onSaveHistory();
     }
 
     private static class SummaryAdapter extends RecyclerView.Adapter<SummaryAdapter.SummaryViewHolder> {

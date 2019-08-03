@@ -9,6 +9,7 @@ import android.widget.EditText;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
+import th.ac.dusit.dbizcom.bagculate.db.LocalDb;
 import th.ac.dusit.dbizcom.bagculate.etc.Utils;
 import th.ac.dusit.dbizcom.bagculate.model.User;
 import th.ac.dusit.dbizcom.bagculate.net.ApiClient;
@@ -82,6 +83,8 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onSuccess(LoginResponse responseBody) { // register สำเร็จ
                         User user = responseBody.user;
+                        new LocalDb(LoginActivity.this).logUser(user);
+
                         Utils.showLongToast(LoginActivity.this, "ยินดีต้อนรับ " + user.name);
 
                         Intent intent = new Intent(LoginActivity.this, MenuActivity.class);
