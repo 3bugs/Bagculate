@@ -84,7 +84,7 @@ function doLogin()
             $_SESSION[KEY_SESSION_USER_USERNAME] = $user['username'];
             $_SESSION[KEY_SESSION_USER_EMAIL] = $user['email'];
         } else {
-            $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+            $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
             $response[KEY_ERROR_MESSAGE] = 'ชื่อผู้ใช้ หรือรหัสผ่าน ไม่ถูกต้อง';
             $response[KEY_ERROR_MESSAGE_MORE] = '';
             $response[KEY_LOGIN_SUCCESS] = FALSE;

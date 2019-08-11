@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AlwaysShowAction,HardcodedText">
+    <item
+        android:id="@+id/action_weight"
+        android:icon="@drawable/ic_weight"
+        android:title="เกณฑ์น้ำหนัก"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_prohibit"
+        android:icon="@drawable/ic_prohibit"
+        android:title="สิ่งของต้องห้าม"
+        app:showAsAction="always" />
+</menu>

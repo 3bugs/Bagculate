@@ -1,5 +1,6 @@
 package th.ac.dusit.dbizcom.bagculate;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -8,6 +9,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
@@ -21,6 +24,7 @@ import th.ac.dusit.dbizcom.bagculate.fragment.ObjectFragment;
 import th.ac.dusit.dbizcom.bagculate.fragment.ObjectListFragment;
 import th.ac.dusit.dbizcom.bagculate.fragment.SummaryFragment;
 import th.ac.dusit.dbizcom.bagculate.model.Bag;
+import th.ac.dusit.dbizcom.bagculate.model.History;
 import th.ac.dusit.dbizcom.bagculate.model.Object;
 import th.ac.dusit.dbizcom.bagculate.model.ObjectType;
 
@@ -47,6 +51,7 @@ public class MenuActivity extends AppCompatActivity implements
         SLIDE,
         FADE
     }
+
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
 
@@ -86,7 +91,7 @@ public class MenuActivity extends AppCompatActivity implements
                     }
                     popAllBackStack();
                     loadFragment(
-                            new SummaryFragment(),
+                            SummaryFragment.newInstance(mSelectedBag, mObjectListInBag, null),
                             TAG_FRAGMENT_SUMMARY,
                             false,
                             FragmentTransitionType.FADE
@@ -115,6 +120,28 @@ public class MenuActivity extends AppCompatActivity implements
         mNavView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
         loadFragment(new BagFragment(), TAG_FRAGMENT_BAG, false, FragmentTransitionType.NONE);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.activity_main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_weight:
+                Intent intent = new Intent(MenuActivity.this, AirlinesWeightActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_prohibit:
+
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
 
     protected void loadFragment(Fragment fragment, String tag, boolean addToBackStack,
@@ -206,10 +233,10 @@ public class MenuActivity extends AppCompatActivity implements
         }
     }
 
-    @Override
+    /*@Override
     public Bag getSelectedBag() {
         return mSelectedBag;
-    }
+    }*/
 
     @Override
     public List<Object> getObjectListInBag() {
@@ -238,5 +265,15 @@ public class MenuActivity extends AppCompatActivity implements
     @Override
     public void onClickBagFab() {
         mNavView.setSelectedItemId(R.id.nav_summary);
+    }
+
+    @Override
+    public void onClickHistoryItem(History history) {
+        loadFragment(
+                SummaryFragment.newInstance(history.bag, history.objectList, history.createdAt),
+                TAG_FRAGMENT_SUMMARY,
+                true,
+                FragmentTransitionType.SLIDE
+        );
     }
 }

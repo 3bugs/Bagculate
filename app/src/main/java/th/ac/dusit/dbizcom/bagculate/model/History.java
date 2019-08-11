@@ -15,6 +15,13 @@ public class History {
     @SerializedName("object_list")
     public List<Object> objectList;
 
+    public History(int id, String createdAt, Bag bag, List<Object> objectList) {
+        this.id = id;
+        this.createdAt = createdAt;
+        this.bag = bag;
+        this.objectList = objectList;
+    }
+
     @Override
     public String toString() {
         return createdAt;

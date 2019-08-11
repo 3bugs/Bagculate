@@ -3,6 +3,7 @@ package th.ac.dusit.dbizcom.bagculate.fragment;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -25,7 +26,6 @@ import retrofit2.Retrofit;
 import th.ac.dusit.dbizcom.bagculate.R;
 import th.ac.dusit.dbizcom.bagculate.db.LocalDb;
 import th.ac.dusit.dbizcom.bagculate.etc.Utils;
-import th.ac.dusit.dbizcom.bagculate.model.Bag;
 import th.ac.dusit.dbizcom.bagculate.model.History;
 import th.ac.dusit.dbizcom.bagculate.model.Object;
 import th.ac.dusit.dbizcom.bagculate.model.User;
@@ -37,11 +37,13 @@ import th.ac.dusit.dbizcom.bagculate.net.WebServices;
 public class HistoryFragment extends Fragment {
 
     private static final String TAG = HistoryFragment.class.getName();
+    private static final String KEY_LIST_POSITION = "list_position";
 
     private ProgressBar mProgressBar;
+    private RecyclerView mRecyclerView;
 
     private HistoryFragmentListener mListener;
-    private List<History> mHistoryList;
+    private List<History> mHistoryList = null;
 
     public HistoryFragment() {
         // Required empty public constructor
@@ -58,13 +60,19 @@ public class HistoryFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         mProgressBar = view.findViewById(R.id.progress_bar);
-        doGetHistory();
+        if (mHistoryList == null) {
+            doGetHistory();
+        } else {
+            setupRecyclerView();
+        }
     }
 
     private void doGetHistory() {
         LocalDb localDb = new LocalDb(getActivity());
         User user = localDb.getUser();
         if (user == null) {
+            mHistoryList = localDb.getHistory();
+            setupRecyclerView();
 
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
@@ -106,13 +114,14 @@ public class HistoryFragment extends Fragment {
 
         HistoryAdapter adapter = new HistoryAdapter(
                 getContext(),
-                mHistoryList
+                mHistoryList,
+                mListener
         );
 
-        RecyclerView recyclerView = getView().findViewById(R.id.history_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.addItemDecoration(new SpacingDecoration(getContext()));
-        recyclerView.setAdapter(adapter);
+        mRecyclerView = getView().findViewById(R.id.history_recycler_view);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.addItemDecoration(new SpacingDecoration(getContext()));
+        mRecyclerView.setAdapter(adapter);
     }
 
     @Override
@@ -140,22 +149,40 @@ public class HistoryFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (mRecyclerView.getLayoutManager() != null) {
+            outState.putParcelable(KEY_LIST_POSITION,
+                    mRecyclerView.getLayoutManager().onSaveInstanceState());
+        }
+    }
+
+    @Override
+    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
+        super.onViewStateRestored(savedInstanceState);
+        if (savedInstanceState != null && mRecyclerView.getLayoutManager() != null) {
+            Parcelable savedRecyclerLayoutState = savedInstanceState.getParcelable(KEY_LIST_POSITION);
+            mRecyclerView.getLayoutManager().onRestoreInstanceState(savedRecyclerLayoutState);
+        }
+    }
+
     public interface HistoryFragmentListener {
         void setTitle(String title);
 
-        Bag getSelectedBag();
-
-        List<Object> getObjectListInBag();
+        void onClickHistoryItem(History history);
     }
 
     private static class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
 
         private final Context mContext;
         private final List<History> mHistoryList;
+        private final HistoryFragmentListener mListener;
 
-        HistoryAdapter(Context context, List<History> historyList) {
+        HistoryAdapter(Context context, List<History> historyList, HistoryFragmentListener listener) {
             this.mContext = context;
             this.mHistoryList = historyList;
+            this.mListener = listener;
         }
 
         @NonNull
@@ -170,19 +197,27 @@ public class HistoryFragment extends Fragment {
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
             History history = mHistoryList.get(position);
+            holder.mHistory = history;
 
             int objectCount = 0;
             for (Object object : history.objectList) {
                 objectCount += object.count;
             }
 
-            holder.mTitleTextView.setText(history.bag.name);
-            String objectCountText = String.format(
+            String title = String.format(
                     Locale.getDefault(),
-                    "จำนวนสิ่งของ %d ชิ้น",
+                    "กระเป๋า%s + สิ่งของ %d ชิ้น",
+                    history.bag.type == 0 ? "สะพาย" : "ล้อลาก",
                     objectCount
             );
-            holder.mSubTitleTextView.setText(objectCountText);
+            holder.mTitleTextView.setText(title);
+
+            String weightText = String.format(
+                    Locale.getDefault(),
+                    "น้ำหนักรวม %.2f กก.",
+                    SummaryFragment.calculateTotalWeight(history.bag, history.objectList)
+            );
+            holder.mSubTitleTextView.setText(weightText);
             holder.mDateTextView.setText(history.createdAt);
         }
 
@@ -198,7 +233,7 @@ public class HistoryFragment extends Fragment {
             private final TextView mSubTitleTextView;
             private final TextView mDateTextView;
 
-            private Object mObject;
+            private History mHistory;
 
             ViewHolder(View itemView) {
                 super(itemView);
@@ -207,6 +242,15 @@ public class HistoryFragment extends Fragment {
                 mTitleTextView = itemView.findViewById(R.id.title_text_view);
                 mSubTitleTextView = itemView.findViewById(R.id.sub_title_text_view);
                 mDateTextView = itemView.findViewById(R.id.date_text_view);
+
+                mRootView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (mListener != null) {
+                            mListener.onClickHistoryItem(mHistory);
+                        }
+                    }
+                });
             }
         }
     }

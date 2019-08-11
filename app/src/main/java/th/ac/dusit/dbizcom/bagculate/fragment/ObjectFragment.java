@@ -153,7 +153,7 @@ public class ObjectFragment extends Fragment implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         if (mListener != null) {
-            mListener.setTitle("เลือกประเภทสิ่งของที่จะใส่ลงกระเป๋า");
+            mListener.setTitle("เลือกประเภทสิ่งของ");
             //mListener.updateNavView(1);
         }
     }

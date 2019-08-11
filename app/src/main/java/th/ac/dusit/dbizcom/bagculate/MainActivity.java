@@ -1,25 +1,31 @@
 package th.ac.dusit.dbizcom.bagculate;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.bumptech.glide.request.RequestOptions;
 import com.glide.slider.library.Animations.DescriptionAnimation;
 import com.glide.slider.library.SliderLayout;
 import com.glide.slider.library.SliderTypes.BaseSliderView;
-import com.glide.slider.library.SliderTypes.DefaultSliderView;
 import com.glide.slider.library.SliderTypes.TextSliderView;
 import com.glide.slider.library.Tricks.ViewPagerEx;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import th.ac.dusit.dbizcom.bagculate.db.LocalDb;
+import th.ac.dusit.dbizcom.bagculate.model.User;
+
 public class MainActivity extends AppCompatActivity implements ViewPagerEx.OnPageChangeListener, BaseSliderView.OnSliderClickListener {
 
     private SliderLayout mSlider;
+    private User mUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements ViewPagerEx.OnPag
         setContentView(R.layout.activity_main);
 
         setupImageSlider();
+        checkUser();
 
         Button startButton = findViewById(R.id.start_button);
         startButton.setOnClickListener(new View.OnClickListener() {
@@ -37,11 +44,35 @@ public class MainActivity extends AppCompatActivity implements ViewPagerEx.OnPag
             }
         });
         Button loginButton = findViewById(R.id.login_button);
+        loginButton.setText(mUser == null ? "เข้าสู่ระบบ" : "ออกจากระบบ");
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-                startActivity(intent);
+                if (mUser != null) {
+                    new AlertDialog.Builder(MainActivity.this)
+                            .setTitle("LOG OUT")
+                            .setMessage("ยืนยันออกจากระบบ?")
+                            .setPositiveButton("ออก", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    new LocalDb(MainActivity.this).clearUser();
+                                    checkUser();
+                                    /*Intent intent = new Intent(MainActivity.this, MainActivity.class);
+                                    startActivity(intent);
+                                    finish();*/
+                                }
+                            })
+                            .setNegativeButton("ไม่ออก", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    //do nothing
+                                }
+                            })
+                            .show();
+                } else {
+                    Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+                    startActivity(intent);
+                }
             }
         });
         Button registerButton = findViewById(R.id.register_button);
@@ -52,6 +83,20 @@ public class MainActivity extends AppCompatActivity implements ViewPagerEx.OnPag
                 startActivity(intent);
             }
         });
+    }
+
+    private void checkUser() {
+        mUser = new LocalDb(MainActivity.this).getUser();
+        TextView usernameTextView = findViewById(R.id.username_text_view);
+        if (mUser == null) {
+            usernameTextView.setVisibility(View.GONE);
+        } else {
+            usernameTextView.setVisibility(View.VISIBLE);
+            usernameTextView.setText("User: ".concat(mUser.name));
+        }
+
+        Button loginButton = findViewById(R.id.login_button);
+        loginButton.setText(mUser == null ? "เข้าสู่ระบบ" : "ออกจากระบบ");
     }
 
     private void setupImageSlider() {
@@ -102,6 +147,12 @@ public class MainActivity extends AppCompatActivity implements ViewPagerEx.OnPag
         mSlider.setCustomAnimation(new DescriptionAnimation());
         mSlider.setDuration(5000);
         mSlider.addOnPageChangeListener(this);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        checkUser();
     }
 
     @Override

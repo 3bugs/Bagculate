@@ -1,7 +1,6 @@
 package th.ac.dusit.dbizcom.bagculate.fragment;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Rect;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -18,14 +17,16 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 import retrofit2.Call;
 import retrofit2.Retrofit;
-import th.ac.dusit.dbizcom.bagculate.LoginActivity;
 import th.ac.dusit.dbizcom.bagculate.MenuActivity;
 import th.ac.dusit.dbizcom.bagculate.R;
 import th.ac.dusit.dbizcom.bagculate.db.LocalDb;
@@ -36,19 +37,52 @@ import th.ac.dusit.dbizcom.bagculate.model.ObjectType;
 import th.ac.dusit.dbizcom.bagculate.model.User;
 import th.ac.dusit.dbizcom.bagculate.net.AddHistoryResponse;
 import th.ac.dusit.dbizcom.bagculate.net.ApiClient;
-import th.ac.dusit.dbizcom.bagculate.net.LoginResponse;
 import th.ac.dusit.dbizcom.bagculate.net.MyRetrofitCallback;
 import th.ac.dusit.dbizcom.bagculate.net.WebServices;
 
 public class SummaryFragment extends Fragment {
 
+    private static final String TAG = SummaryFragment.class.getName();
+    private static final String ARG_SELECTED_BAG_JSON = "selectd_bag";
+    private static final String ARG_OBJECT_LIST_JSON = "object_list_json";
+    private static final String ARG_HISTORY_DATE = "history_date";
+
     private FloatingActionButton mSaveFab;
     private ProgressBar mProgressBar;
+
+    private Bag mSelectedBag;
+    private List<Object> mObjectList;
+    private String mHistoryDate;
 
     private SummaryFragmentListener mListener;
 
     public SummaryFragment() {
         // Required empty public constructor
+    }
+
+    public static SummaryFragment newInstance(Bag selectedBag, List<Object> objectList, String historyDate) {
+        SummaryFragment fragment = new SummaryFragment();
+        Bundle args = new Bundle();
+        args.putString(ARG_SELECTED_BAG_JSON, new Gson().toJson(selectedBag));
+        args.putString(ARG_OBJECT_LIST_JSON, new Gson().toJson(objectList));
+        args.putString(ARG_HISTORY_DATE, historyDate);
+        fragment.setArguments(args);
+        return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        Bundle args = getArguments();
+        if (args != null) {
+            String selectedBagJson = args.getString(ARG_SELECTED_BAG_JSON);
+            mSelectedBag = new Gson().fromJson(selectedBagJson, Bag.class);
+            String objectListJson = args.getString(ARG_OBJECT_LIST_JSON);
+            mObjectList = new Gson().fromJson(objectListJson, new TypeToken<ArrayList<Object>>() {
+            }.getType());
+            mHistoryDate = args.getString(ARG_HISTORY_DATE);
+        }
     }
 
     @Override
@@ -61,10 +95,7 @@ public class SummaryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        double totalWeight = mListener.getSelectedBag().weight;
-        for (Object o : mListener.getObjectListInBag()) {
-            totalWeight += ((o.weight * o.getCount()) / 1000d);
-        }
+        double totalWeight = calculateTotalWeight(mSelectedBag, mObjectList);
 
         TextView totalWeightTextView = view.findViewById(R.id.total_weight_text_view);
         String msg = String.format(Locale.getDefault(), "น้ำหนักรวม %.2f กก.", totalWeight);
@@ -74,8 +105,8 @@ public class SummaryFragment extends Fragment {
             RecyclerView objectRecyclerView = view.findViewById(R.id.object_recycler_view);
             SummaryAdapter adapter = new SummaryAdapter(
                     getContext(),
-                    mListener.getSelectedBag(),
-                    mListener.getObjectListInBag()
+                    mSelectedBag, //mListener.getSelectedBag(),
+                    mObjectList //mListener.getObjectListInBag()
             );
             objectRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
             objectRecyclerView.addItemDecoration(new SummaryFragment.SpacingDecoration(getContext()));
@@ -84,12 +115,16 @@ public class SummaryFragment extends Fragment {
 
         mProgressBar = view.findViewById(R.id.progress_bar);
         mSaveFab = view.findViewById(R.id.save_history_fab);
-        mSaveFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                doSaveHistory();
-            }
-        });
+        if (mHistoryDate == null) {
+            mSaveFab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    doSaveHistory();
+                }
+            });
+        } else {
+            mSaveFab.hide();
+        }
     }
 
     private void doSaveHistory() {
@@ -100,7 +135,10 @@ public class SummaryFragment extends Fragment {
         LocalDb localDb = new LocalDb(getActivity());
         User user = localDb.getUser();
         if (user == null) {
-            Toast.makeText(getActivity(), "ยังไม่ได้ login", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(getActivity(), "ยังไม่ได้ login", Toast.LENGTH_SHORT).show();
+            localDb.addHistory(mSelectedBag, mObjectList);
+            mListener.onSaveHistory();
+
         } else {
             mProgressBar.setVisibility(View.VISIBLE);
 
@@ -118,7 +156,7 @@ public class SummaryFragment extends Fragment {
 
             Call<AddHistoryResponse> call = services.addHistory(
                     user.id,
-                    activity.getSelectedBag().id,
+                    mSelectedBag.id,
                     sb.toString()
             );
             call.enqueue(new MyRetrofitCallback<>(
@@ -172,17 +210,29 @@ public class SummaryFragment extends Fragment {
     public void onResume() {
         super.onResume();
         if (mListener != null) {
-            mListener.setTitle("รายการสิ่งของที่เลือกไว้");
+            if (mHistoryDate == null) {
+                mListener.setTitle("รายการสิ่งของที่เลือกไว้");
+            } else {
+                mListener.setTitle("ประวัติ: ".concat(mHistoryDate));
+            }
             //mListener.updateNavView(1);
         }
+    }
+
+    public static double calculateTotalWeight(Bag bag, List<Object> objectList) {
+        double totalWeight = bag.weight;
+        for (Object o : objectList) {
+            totalWeight += o.weight * o.getCount() / 1000d;
+        }
+        return totalWeight;
     }
 
     public interface SummaryFragmentListener {
         void setTitle(String title);
 
-        Bag getSelectedBag();
+        //Bag getSelectedBag();
 
-        List<Object> getObjectListInBag();
+        //List<Object> getObjectListInBag();
 
         void onSaveHistory();
     }
@@ -224,11 +274,11 @@ public class SummaryFragment extends Fragment {
                 String weightText = "น้ำหนัก " + (object.weight * object.getCount()) + " กรัม";
                 holder.mObjectWeightTextView.setText(weightText);
 
-                for (Object o : mObjectList) {
+                /*for (Object o : mObjectList) {
                     if (o.id == object.id) {
                         object.setCount(o.getCount());
                     }
-                }
+                }*/
 
                 holder.mBadgeTextView.setText(String.valueOf(object.getCount()));
                 if (object.getCount() > 0) {

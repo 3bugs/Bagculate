@@ -2,29 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8639df29-90e3-43c6-b38e-291d3614b1a6" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/HistoryFragment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/History.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/AddHistoryResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/GetHistoryResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_save.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_history.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_history.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../app/build.gradle" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/AirlinesWeightActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/Airline.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_air_asia.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_bangkok_airways.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_jetasia_airways.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_newgen_airways.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_nok_air.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_nokscoot.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_thai_airways.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_thai_lion_air.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_thai_smile.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_thai_vietjet.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_wisdom_airways.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/ic_weight.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_chevron_right.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable/ic_prohibit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_airlines_weight.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_airline.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/menu/activity_main.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/bagculate_bag.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/bagculate_history.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/bagculate_history_details.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/bagculate_object.sql" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/db/bagculate_user.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/LoginActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/LoginActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MainActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MenuActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/db/LocalDb.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/db/LocalDb.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/ObjectListFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/ObjectListFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/HistoryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/HistoryFragment.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/ObjectFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/ObjectFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/SummaryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/SummaryFragment.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/Object.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/Object.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/ApiClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/ApiClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/WebServices.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/net/WebServices.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/image_slide_03.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/image_slide_03.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable/bg_radio_bag_type_normal.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable/bg_radio_bag_type_normal.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_summary.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/fragment_summary.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/res/menu/bottom_nav_menu.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/menu/bottom_nav_menu.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/History.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_main.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_history.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_history.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.php" afterDir="false" />
     </list>
@@ -106,6 +118,8 @@
       <workItem from="1559449690663" duration="1769000" />
       <workItem from="1561273535004" duration="1323000" />
       <workItem from="1564816957325" duration="5786000" />
+      <workItem from="1564973003723" duration="532000" />
+      <workItem from="1565495344421" duration="3949000" />
     </task>
     <servers />
   </component>
@@ -117,7 +131,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
