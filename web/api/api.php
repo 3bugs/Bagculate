@@ -32,6 +32,9 @@ switch ($action) {
     case 'login':
         doLogin();
         break;
+    case 'login_admin':
+        doLoginAdmin();
+        break;
     case 'logout':
         doLogout();
         break;
@@ -49,6 +52,15 @@ switch ($action) {
         break;
     case 'add_history':
         doAddHistory();
+        break;
+    case 'add_bag':
+        doAddBag();
+        break;
+    case 'update_bag':
+        doUpdateBag();
+        break;
+    case 'delete_bag':
+        doDeleteBag();
         break;
     default:
         $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
@@ -69,6 +81,43 @@ function doLogin()
     $password = $db->real_escape_string($_POST['password']);
 
     $selectUserSql = "SELECT * FROM `bagculate_user` WHERE `username` = '$username' AND `password` = '$password'";
+
+    $selectUserResult = $db->query($selectUserSql);
+    if ($selectUserResult) {
+        if ($selectUserResult->num_rows > 0) {
+            $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+            $response[KEY_ERROR_MESSAGE] = 'เข้าสู่ระบบสำเร็จ';
+            $response[KEY_ERROR_MESSAGE_MORE] = '';
+            $response[KEY_LOGIN_SUCCESS] = TRUE;
+            $user = fetchUser($selectUserResult);
+            $response['user'] = $user;
+
+            $_SESSION[KEY_SESSION_USER_ID] = $user['id'];
+            $_SESSION[KEY_SESSION_USER_USERNAME] = $user['username'];
+            $_SESSION[KEY_SESSION_USER_EMAIL] = $user['email'];
+        } else {
+            $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+            $response[KEY_ERROR_MESSAGE] = 'ชื่อผู้ใช้ หรือรหัสผ่าน ไม่ถูกต้อง';
+            $response[KEY_ERROR_MESSAGE_MORE] = '';
+            $response[KEY_LOGIN_SUCCESS] = FALSE;
+        }
+        $selectUserResult->close();
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการอ่านข้อมูลบัญชีผู้ใช้';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $selectUserSql";
+    }
+}
+
+function doLoginAdmin()
+{
+    global $db, $response;
+
+    $username = $db->real_escape_string($_POST['username']);
+    $password = $db->real_escape_string($_POST['password']);
+
+    $selectUserSql = "SELECT * FROM `bagculate_user` WHERE `username` = '$username' AND `password` = '$password' AND `is_admin` = 1";
 
     $selectUserResult = $db->query($selectUserSql);
     if ($selectUserResult) {
@@ -314,6 +363,68 @@ function doAddHistory()
     } else {
         $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
         $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล (1)';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+    }
+}
+
+function doAddBag()
+{
+    global $db, $response;
+
+    $bagName = $db->real_escape_string($_POST['bagName']);
+    $bagWeight = $db->real_escape_string($_POST['bagWeight']);
+    $bagType = $db->real_escape_string($_POST['bagType']);
+
+    $sql = "INSERT INTO `bagculate_bag` (name, weight, type) VALUES ('$bagName', $bagWeight, $bagType)";
+    if ($db->query($sql)) {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+        $response[KEY_ERROR_MESSAGE] = 'เพิ่มข้อมูลสำเร็จ';
+        $response[KEY_ERROR_MESSAGE_MORE] = '';
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+    }
+}
+
+function doUpdateBag()
+{
+    global $db, $response;
+
+    $bagId = $db->real_escape_string($_POST['bagId']);
+    $bagName = $db->real_escape_string($_POST['bagName']);
+    $bagWeight = $db->real_escape_string($_POST['bagWeight']);
+    $bagType = $db->real_escape_string($_POST['bagType']);
+
+    $sql = "UPDATE `bagculate_bag` SET name = '$bagName', weight = $bagWeight, type = $bagType WHERE id = $bagId";
+    if ($db->query($sql)) {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+        $response[KEY_ERROR_MESSAGE] = 'แก้ไขข้อมูลสำเร็จ';
+        $response[KEY_ERROR_MESSAGE_MORE] = '';
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+    }
+}
+
+function doDeleteBag()
+{
+    global $db, $response;
+
+    $bagId = $db->real_escape_string($_POST['bagId']);
+
+    $sql = "DELETE FROM `bagculate_bag` WHERE id = $bagId";
+    if ($db->query($sql)) {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+        $response[KEY_ERROR_MESSAGE] = 'ลบข้อมูลสำเร็จ';
+        $response[KEY_ERROR_MESSAGE_MORE] = '';
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการลบข้อมูล';
         $errMessage = $db->error;
         $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
     }

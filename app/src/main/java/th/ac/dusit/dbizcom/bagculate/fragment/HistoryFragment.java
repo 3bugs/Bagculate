@@ -84,11 +84,10 @@ public class HistoryFragment extends Fragment {
             call.enqueue(new MyRetrofitCallback<>(
                     getActivity(),
                     null,
-                    null,
+                    mProgressBar,
                     new MyRetrofitCallback.MyRetrofitCallbackListener<GetHistoryResponse>() {
                         @Override
                         public void onSuccess(GetHistoryResponse responseBody) {
-                            mProgressBar.setVisibility(View.GONE);
                             mHistoryList = responseBody.historyList;
                             setupRecyclerView();
 
@@ -97,7 +96,6 @@ public class HistoryFragment extends Fragment {
 
                         @Override
                         public void onError(String errorMessage) {
-                            mProgressBar.setVisibility(View.GONE);
                             Utils.showOkDialog(
                                     getActivity(),
                                     "Error",
