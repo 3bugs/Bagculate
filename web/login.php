@@ -47,6 +47,8 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
             </div>
 
             <div style="padding-top:30px;" class="panel-body">
+                <div style="display:none" id="alertLogin" class="alert alert-danger col-sm-12"></div>
+
                 <form id="loginForm" class="form-horizontal" role="form">
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -85,8 +87,6 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
                         </div>
                     </div>-->
                 </form>
-
-                <div style="display:none" id="alertLogin" class="alert alert-danger col-sm-12"></div>
             </div>
         </div>
     </div>
