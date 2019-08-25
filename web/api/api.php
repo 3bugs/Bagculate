@@ -62,6 +62,15 @@ switch ($action) {
     case 'delete_bag':
         doDeleteBag();
         break;
+    case 'add_object':
+        doAddObject();
+        break;
+    case 'update_object':
+        doUpdateObject();
+        break;
+    case 'delete_object':
+        doDeleteObject();
+        break;
     default:
         $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
         $response[KEY_ERROR_MESSAGE] = 'No action specified or invalid action.';
@@ -418,6 +427,67 @@ function doDeleteBag()
     $bagId = $db->real_escape_string($_POST['bagId']);
 
     $sql = "DELETE FROM `bagculate_bag` WHERE id = $bagId";
+    if ($db->query($sql)) {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+        $response[KEY_ERROR_MESSAGE] = 'ลบข้อมูลสำเร็จ';
+        $response[KEY_ERROR_MESSAGE_MORE] = '';
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการลบข้อมูล';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+    }
+}
+function doAddObject()
+{
+    global $db, $response;
+
+    $objectName = $db->real_escape_string($_POST['objectName']);
+    $objectWeight = $db->real_escape_string($_POST['objectWeight']);
+    $objectType = $db->real_escape_string($_POST['objectType']);
+
+    $sql = "INSERT INTO `bagculate_object` (name, weight, type) VALUES ('$objectName', $objectWeight, '$objectType')";
+    if ($db->query($sql)) {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+        $response[KEY_ERROR_MESSAGE] = 'เพิ่มข้อมูลสำเร็จ';
+        $response[KEY_ERROR_MESSAGE_MORE] = '';
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+    }
+}
+
+function doUpdateObject()
+{
+    global $db, $response;
+
+    $objectId = $db->real_escape_string($_POST['objectId']);
+    $objectName = $db->real_escape_string($_POST['objectName']);
+    $objectWeight = $db->real_escape_string($_POST['objectWeight']);
+    $objectType = $db->real_escape_string($_POST['objectType']);
+
+    $sql = "UPDATE `bagculate_object` SET name = '$objectName', weight = $objectWeight, type = '$objectType' WHERE id = $objectId";
+    if ($db->query($sql)) {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
+        $response[KEY_ERROR_MESSAGE] = 'แก้ไขข้อมูลสำเร็จ';
+        $response[KEY_ERROR_MESSAGE_MORE] = '';
+    } else {
+        $response[KEY_ERROR_CODE] = ERROR_CODE_ERROR;
+        $response[KEY_ERROR_MESSAGE] = 'เกิดข้อผิดพลาดในการบันทึกข้อมูล';
+        $errMessage = $db->error;
+        $response[KEY_ERROR_MESSAGE_MORE] = "$errMessage\nSQL: $sql";
+    }
+}
+
+function doDeleteObject()
+{
+    global $db, $response;
+
+    $objectId = $db->real_escape_string($_POST['objectId']);
+
+    $sql = "DELETE FROM `bagculate_object` WHERE id = $objectId";
     if ($db->query($sql)) {
         $response[KEY_ERROR_CODE] = ERROR_CODE_SUCCESS;
         $response[KEY_ERROR_MESSAGE] = 'ลบข้อมูลสำเร็จ';

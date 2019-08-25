@@ -23,16 +23,16 @@ if ($db->connect_errno) {
 }
 $db->set_charset("utf8");
 
-$sql = "SELECT * FROM `bagculate_bag`";
+$sql = "SELECT * FROM `bagculate_object`";
 if ($result = $db->query($sql)) {
-    $bagList = array();
+    $objectList = array();
     while ($row = $result->fetch_assoc()) {
-        $bag = array();
-        $bag['id'] = (int)$row['id'];
-        $bag['name'] = $row['name'];
-        $bag['weight'] = $row['weight'];
-        $bag['type'] = (int)$row['type'];
-        array_push($bagList, $bag);
+        $object = array();
+        $object['id'] = (int)$row['id'];
+        $object['name'] = $row['name'];
+        $object['weight'] = $row['weight'];
+        $object['type'] = $row['type'];
+        array_push($objectList, $object);
     }
     $result->close();
 } else {
@@ -61,60 +61,63 @@ if ($result = $db->query($sql)) {
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;
                     </button>
-                    <h4 class="modal-title">เพิ่มกระเป๋าเดินทาง</h4>
+                    <h4 class="modal-title">เพิ่มสิ่งของ</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="formAddBag" role="form"
+                    <form id="formAddObject" role="form"
                           style="margin-top: 0; margin-bottom: 0">
                         <div class="box-body">
 
-                            <!--ชื่อกระเป๋า-->
+                            <!--ชื่อสิ่งของ-->
                             <div class="form-group">
-                                <label for="inputBagName">ชื่อกระเป๋า:</label>
+                                <label for="inputObjectName">ชื่อสิ่งของ:</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-font"></i>
                                     </span>
                                     <input type="text" class="form-control"
-                                           id="inputBagName"
-                                           placeholder="กรอกชื่อกระเป๋า" required
-                                           oninvalid="this.setCustomValidity('กรอกชื่อกระเป๋า')"
+                                           id="inputObjectName"
+                                           placeholder="กรอกชื่อสิ่งของ" required
+                                           oninvalid="this.setCustomValidity('กรอกชื่อสิ่งของ')"
                                            oninput="this.setCustomValidity('')">
                                 </div>
                             </div>
                             <!--น้ำหนัก-->
                             <div class="form-group">
-                                <label for="inputBagWeight">น้ำหนัก (กิโลกรัม):</label>
+                                <label for="inputObjectWeight">น้ำหนัก (กรัม):</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-hashtag"></i>
                                     </span>
                                     <input type="number" class="form-control"
-                                           id="inputBagWeight" step="0.01"
-                                           placeholder="กรอกน้ำหนักกระเป๋าในหน่วยกิโลกรัม" required
-                                           oninvalid="this.setCustomValidity('กรอกน้ำหนักกระเป๋าในหน่วยกิโลกรัม')"
+                                           id="inputObjectWeight"
+                                           placeholder="กรอกน้ำหนักสิ่งของในหน่วยกรัม" required
+                                           oninvalid="this.setCustomValidity('กรอกน้ำหนักสิ่งของในหน่วยกรัม และห้ามมีจุดทศนิยม')"
                                            oninput="this.setCustomValidity('')">
                                 </div>
                             </div>
                             <!--ประเภท-->
                             <div class="form-group">
-                                <label for="selectBagType">ประเภท:</label>
+                                <label for="selectObjectType">ประเภท:</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-tag"></i>
                                     </span>
                                     <select class="form-control"
-                                            id="selectBagType" required
-                                            oninvalid="this.setCustomValidity('เลือกประเภทกระเป๋า')"
+                                            id="selectObjectType" required
+                                            oninvalid="this.setCustomValidity('เลือกประเภทสิ่งของ')"
                                             oninput="this.setCustomValidity('')">
-                                        <option value="" disabled selected>เลือกประเภทกระเป๋า</option>
-                                        <option value="0">กระเป๋าสะพาย</option>
-                                        <option value="1">กระเป๋าล้อลาก</option>
+                                        <option value="" disabled selected>เลือกประเภทสิ่งของ</option>
+                                        <option value="shirt">เสื้อ</option>
+                                        <option value="pants">กางเกง</option>
+                                        <option value="shoes">รองเท้า</option>
+                                        <option value="thing">ของใช้</option>
+                                        <option value="etc">อื่นๆ</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div id="addBagResult"
+                            <div id="addObjectResult"
                                  style="text-align: center; color: red; margin-top: 25px; margin-bottom: 20px;">
                             </div>
                         </div>
@@ -137,69 +140,72 @@ if ($result = $db->query($sql)) {
     </div>
 
     <!-- Edit Bag Modal -->
-    <div class="modal fade" id="editBagModal" role="dialog">
+    <div class="modal fade" id="editObjectModal" role="dialog">
         <div class="modal-dialog modal-md">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;
                     </button>
-                    <h4 class="modal-title">แก้ไขกระเป๋าเดินทาง</h4>
+                    <h4 class="modal-title">แก้ไขสิ่งของ</h4>
                 </div>
                 <div class="modal-body">
-                    <form id="formEditBag" role="form"
+                    <form id="formEditObject" role="form"
                           style="margin-top: 0; margin-bottom: 0">
                         <div class="box-body">
 
-                            <input type="hidden" id="inputBagId">
+                            <input type="hidden" id="inputObjectId">
 
-                            <!--ชื่อกระเป๋า-->
+                            <!--ชื่อสิ่งของ-->
                             <div class="form-group">
-                                <label for="inputBagName">ชื่อกระเป๋า:</label>
+                                <label for="inputObjectName">ชื่อสิ่งของ:</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-font"></i>
                                     </span>
                                     <input type="text" class="form-control"
-                                           id="inputBagName"
-                                           placeholder="กรอกชื่อกระเป๋า" required
-                                           oninvalid="this.setCustomValidity('กรอกชื่อกระเป๋า')"
+                                           id="inputObjectName"
+                                           placeholder="กรอกชื่อสิ่งของ" required
+                                           oninvalid="this.setCustomValidity('กรอกชื่อสิ่งของ')"
                                            oninput="this.setCustomValidity('')">
                                 </div>
                             </div>
                             <!--น้ำหนัก-->
                             <div class="form-group">
-                                <label for="inputBagWeight">น้ำหนัก (กิโลกรัม):</label>
+                                <label for="inputObjectWeight">น้ำหนัก (กรัม):</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-hashtag"></i>
                                     </span>
                                     <input type="number" class="form-control"
-                                           id="inputBagWeight" step="0.01"
-                                           placeholder="กรอกน้ำหนักกระเป๋าในหน่วยกิโลกรัม" required
-                                           oninvalid="this.setCustomValidity('กรอกน้ำหนักกระเป๋าในหน่วยกิโลกรัม')"
+                                           id="inputObjectWeight"
+                                           placeholder="กรอกน้ำหนักสิ่งของในหน่วยกรัม" required
+                                           oninvalid="this.setCustomValidity('กรอกน้ำหนักสิ่งของในหน่วยกรัม และห้ามมีจุดทศนิยม')"
                                            oninput="this.setCustomValidity('')">
                                 </div>
                             </div>
                             <!--ประเภท-->
                             <div class="form-group">
-                                <label for="selectBagType">ประเภท:</label>
+                                <label for="selectObjectType">ประเภท:</label>
                                 <div class="input-group">
                                     <span class="input-group-addon">
                                         <i class="fa fa-tag"></i>
                                     </span>
                                     <select class="form-control"
-                                            id="selectBagType" required
-                                            oninvalid="this.setCustomValidity('เลือกประเภทกระเป๋า')"
+                                            id="selectObjectType" required
+                                            oninvalid="this.setCustomValidity('เลือกประเภทสิ่งของ')"
                                             oninput="this.setCustomValidity('')">
-                                        <option value="" disabled selected>เลือกประเภทกระเป๋า</option>
-                                        <option value="0">กระเป๋าสะพาย</option>
-                                        <option value="1">กระเป๋าล้อลาก</option>
+                                        <option value="" disabled selected>เลือกประเภทสิ่งของ</option>
+                                        <option value="shirt">เสื้อ</option>
+                                        <option value="pants">กางเกง</option>
+                                        <option value="shoes">รองเท้า</option>
+                                        <option value="thing">ของใช้</option>
+                                        <option value="etc">อื่นๆ</option>
                                     </select>
                                 </div>
                             </div>
 
-                            <div id="editBagResult"
+                            <div id="editObjectResult"
                                  style="text-align: center; color: red; margin-top: 25px; margin-bottom: 20px;">
                             </div>
                         </div>
@@ -230,11 +236,11 @@ if ($result = $db->query($sql)) {
             <!-- Content Header (Page header) -->
             <section class="content-header">
                 <h1>
-                    กระเป๋าเดินทาง
+                    สิ่งของ
                 </h1>
             </section>
 
-            <!-- Main content: ข้อมูลกระเป๋าเดินทาง -->
+            <!-- Main content: ข้อมูลสิ่งของ -->
             <section class="content">
                 <div class="row">
                     <div class="col-xs-12">
@@ -244,42 +250,60 @@ if ($result = $db->query($sql)) {
                                 <button type="button" class="btn btn-success pull-right"
                                         data-toggle="modal" data-target="#addBagModal">
                                     <span class="fa fa-plus"></span>&nbsp;
-                                    เพิ่มกระเป๋าเดินทาง
+                                    เพิ่มสิ่งของ
                                 </button>
                             </div>
                             <div class="box-body">
                                 <table id="tableBag" class="table table-bordered table-striped">
                                     <thead>
                                     <tr>
-                                        <th style="width: 50%; text-align: center">ชื่อกระเป๋า</th>
-                                        <th style="width: 30%; text-align: center">น้ำหนัก (กิโลกรัม)</th>
+                                        <th style="width: 50%; text-align: center">ชื่อสิ่งของ</th>
+                                        <th style="width: 30%; text-align: center">น้ำหนัก (กรัม)</th>
                                         <th style="width: 20%; text-align: center">ประเภท</th>
                                         <th style="text-align: center" nowrap>จัดการ</th>
                                     </tr>
                                     </thead>
                                     <tbody>
                                     <?php
-                                    if (sizeof($bagList) == 0) {
+                                    if (sizeof($objectList) == 0) {
                                         ?>
                                         <tr valign="middle">
-                                            <td colspan="10" align="center">ไม่มีข้อมูลกระเป๋าเดินทาง</td>
+                                            <td colspan="10" align="center">ไม่มีข้อมูลสิ่งของ</td>
                                         </tr>
                                         <?php
                                     } else {
-                                        foreach ($bagList as $bag) {
-                                            $bagId = $bag['id'];
-                                            $bagName = $bag['name'];
-                                            $bagWeight = $bag['weight'];
-                                            $bagType = $bag['type'];
+                                        foreach ($objectList as $object) {
+                                            $bagId = $object['id'];
+                                            $bagName = $object['name'];
+                                            $bagWeight = $object['weight'];
+                                            $bagType = $object['type'];
+                                            $bagTypeText = '';
+                                            switch ($bagType) {
+                                                case 'shirt':
+                                                    $bagTypeText = 'เสื้อ';
+                                                    break;
+                                                case 'pants':
+                                                    $bagTypeText = 'กางเกง';
+                                                    break;
+                                                case 'shoes':
+                                                    $bagTypeText = 'รองเท้า';
+                                                    break;
+                                                case 'thing':
+                                                    $bagTypeText = 'ของใช้';
+                                                    break;
+                                                case 'etc':
+                                                    $bagTypeText = 'อื่นๆ';
+                                                    break;
+                                            }
                                             ?>
                                             <tr style="">
                                                 <td style="vertical-align: top; text-align: center"><?= $bagName; ?></td>
                                                 <td style="vertical-align: top; text-align: center"><?= $bagWeight; ?></td>
-                                                <td style="vertical-align: top; text-align: center"><?= $bagType === 0 ? 'สะพาย' : 'ล้อลาก'; ?></td>
+                                                <td style="vertical-align: top; text-align: center"><?= $bagTypeText; ?></td>
                                                 <td style="text-align: center" nowrap>
                                                     <button type="button" class="btn btn-warning"
                                                             style="margin-left: 6px; margin-right: 3px;"
-                                                            onclick="onClickEdit(this, <?= $bagId; ?>, '<?= $bagName; ?>', '<?= $bagWeight; ?>', <?= $bagType; ?>)">
+                                                            onclick="onClickEdit(this, <?= $bagId; ?>, '<?= $bagName; ?>', '<?= $bagWeight; ?>', '<?= $bagType; ?>')">
                                                         <span class="fa fa-edit"></span>&nbsp;
                                                         แก้ไข
                                                     </button>
@@ -340,33 +364,33 @@ if ($result = $db->query($sql)) {
                 }
             });
 
-            $('#formAddBag').submit(event => {
+            $('#formAddObject').submit(event => {
                 event.preventDefault();
-                doAddBag();
+                doAddObject();
             });
-            $('#formEditBag').submit(event => {
+            $('#formEditObject').submit(event => {
                 event.preventDefault();
-                doUpdateBag();
+                doUpdateObject();
             });
         });
 
-        function onClickEdit(element, bagId, bagName, bagWeight, bagType) {
-            $('#formEditBag #inputBagId').val(bagId);
-            $('#formEditBag #inputBagName').val(bagName);
-            $('#formEditBag #inputBagWeight').val(bagWeight);
-            $('#formEditBag #selectBagType').val(bagType);
-            $('#formEditBag #editBagResult').text('');
-            $('#editBagModal').modal('show');
+        function onClickEdit(element, objectId, objectName, objectWeight, objectType) {
+            $('#formEditObject #inputObjectId').val(objectId);
+            $('#formEditObject #inputObjectName').val(objectName);
+            $('#formEditObject #inputObjectWeight').val(objectWeight);
+            $('#formEditObject #selectObjectType').val(objectType);
+            $('#formEditObject #editObjectResult').text('');
+            $('#editObjectModal').modal('show');
         }
 
-        function onClickDelete(element, bagId, bagName, bagWeight) {
+        function onClickDelete(element, objectid, objectName, objectWeight) {
             BootstrapDialog.show({
-                title: 'Confirm Delete Bag',
-                message: 'ยืนยันลบกระเป๋า ' + bagName + ' (น้ำหนัก ' + bagWeight + ' กิโลกรัม)?',
+                title: 'Confirm Delete Object',
+                message: 'ยืนยันลบสิ่งของ ' + objectName + ' (น้ำหนัก ' + objectWeight + ' กรัม)?',
                 buttons: [{
                     label: 'ลบ',
                     action: function (self) {
-                        doDeleteBag(bagId);
+                        doDeleteBag(objectid);
                         self.close();
                     },
                     cssClass: 'btn-primary'
@@ -379,18 +403,18 @@ if ($result = $db->query($sql)) {
             });
         }
 
-        function doDeleteBag(bagId) {
+        function doDeleteBag(objectId) {
             $.post(
-                'api/api.php/delete_bag',
+                'api/api.php/delete_object',
                 {
-                    bagId: bagId,
+                    objectId: objectId,
                 }
             ).done(function (data) {
                 if (data.error_code === 0) {
                     location.reload(true);
                 } else {
                     BootstrapDialog.show({
-                        title: 'Delete Bag',
+                        title: 'Delete Object',
                         message: data.error_message,
                         buttons: [{
                             label: 'ปิด',
@@ -402,7 +426,7 @@ if ($result = $db->query($sql)) {
                 }
             }).fail(function () {
                 BootstrapDialog.show({
-                    title: 'Delete Bag',
+                    title: 'Delete Object',
                     message: 'เกิดข้อผิดพลาดในการเชื่อมต่อ Server',
                     buttons: [{
                         label: 'ปิด',
@@ -414,42 +438,42 @@ if ($result = $db->query($sql)) {
             });
         }
 
-        function doAddBag() {
+        function doAddObject() {
             $.post(
-                'api/api.php/add_bag',
+                'api/api.php/add_object',
                 {
-                    bagName: $('#formAddBag #inputBagName').val(),
-                    bagWeight: $('#formAddBag #inputBagWeight').val(),
-                    bagType: $('#formAddBag #selectBagType').val(),
+                    objectName: $('#formAddObject #inputObjectName').val(),
+                    objectWeight: $('#formAddObject #inputObjectWeight').val(),
+                    objectType: $('#formAddObject #selectObjectType').val(),
                 }
             ).done(function (data) {
                 if (data.error_code === 0) {
                     location.reload(true);
                 } else {
-                    $('#formAddBag #addBagResult').text(data.error_message);
+                    $('#formAddObject #addObjectResult').text(data.error_message);
                 }
             }).fail(function () {
-                $('#formAddBag #addBagResult').text('เกิดข้อผิดพลาดในการเชื่อมต่อ Server');
+                $('#formAddObject #addObjectResult').text('เกิดข้อผิดพลาดในการเชื่อมต่อ Server');
             });
         }
 
-        function doUpdateBag() {
+        function doUpdateObject() {
             $.post(
-                'api/api.php/update_bag',
+                'api/api.php/update_object',
                 {
-                    bagId: $('#formEditBag #inputBagId').val(),
-                    bagName: $('#formEditBag #inputBagName').val(),
-                    bagWeight: $('#formEditBag #inputBagWeight').val(),
-                    bagType: $('#formEditBag #selectBagType').val(),
+                    objectId: $('#formEditObject #inputObjectId').val(),
+                    objectName: $('#formEditObject #inputObjectName').val(),
+                    objectWeight: $('#formEditObject #inputObjectWeight').val(),
+                    objectType: $('#formEditObject #selectObjectType').val(),
                 }
             ).done(function (data) {
                 if (data.error_code === 0) {
                     location.reload(true);
                 } else {
-                    $('#formEditBag #editBagResult').text(data.error_message);
+                    $('#formEditObject #editObjectResult').text(data.error_message);
                 }
             }).fail(function () {
-                $('#formEditBag #editBagResult').text('เกิดข้อผิดพลาดในการเชื่อมต่อ Server');
+                $('#formEditObject #editObjectResult').text('เกิดข้อผิดพลาดในการเชื่อมต่อ Server');
             });
         }
     </script>

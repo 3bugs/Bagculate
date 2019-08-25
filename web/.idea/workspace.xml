@@ -2,95 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b005d11-94f7-49e1-bff6-09c855a613b8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/bag.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/course.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cycle.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/AdminLTE.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/AdminLTE.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/adminlte.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/adminlte.min.css.map" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/alt/AdminLTE-bootstrap-social.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/alt/AdminLTE-bootstrap-social.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/alt/AdminLTE-fullcalendar.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/alt/AdminLTE-fullcalendar.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/alt/AdminLTE-select2.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/alt/AdminLTE-select2.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/alt/AdminLTE-without-plugins.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/alt/AdminLTE-without-plugins.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/_all-skins.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/_all-skins.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-black-light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-black-light.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-black.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-black.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-blue-light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-blue-light.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-blue.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-blue.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-green-light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-green-light.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-green.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-green.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-purple-light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-purple-light.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-purple.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-purple.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-red-light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-red-light.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-red.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-red.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-yellow-light.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-yellow-light.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-yellow.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/css/skins/skin-yellow.min.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/avatar04.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/avatar2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/avatar3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/avatar5.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/credit/american-express.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/credit/cirrus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/credit/mastercard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/credit/mestro.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/credit/paypal.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/credit/paypal2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/credit/visa.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/default-50x50.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/icons.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/photo1.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/photo2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/photo3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/photo4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/user1-128x128.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/user2-160x160.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/user3-128x128.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/user4-128x128.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/user5-128x128.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/user6-128x128.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/user7-128x128.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/img/user8-128x128.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/js/adminlte.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/js/adminlte.min.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/js/demo.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/js/pages/dashboard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/dist/js/pages/dashboard2.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/avatar.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/ic_loading4.gif" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/images/ic_splash.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/db_config.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/foot.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/footer.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/head.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/header.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/include/sidebar.inc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/member.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/object.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pond_info.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/HistoryFragment.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/fragment/HistoryFragment.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/api/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/sidebar.inc" beforeDir="false" afterPath="$PROJECT_DIR$/include/sidebar.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/object.php" beforeDir="false" afterPath="$PROJECT_DIR$/object.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -120,6 +35,11 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+    </key>
+  </component>
   <component name="RunDashboard">
     <option name="ruleStates">
       <list>
@@ -142,7 +62,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1566716626833</updated>
-      <workItem from="1566716628251" duration="7673000" />
+      <workItem from="1566716628251" duration="9324000" />
     </task>
     <servers />
   </component>

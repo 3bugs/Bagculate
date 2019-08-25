@@ -10,7 +10,7 @@
                 </a>
             </li>
             <li>
-                <a href="alert('เมนูนี้ยังไม่เสร็จ')">
+                <a href="object.php">
                     <i class="fa fa-retweet"></i> <span>สิ่งของ</span>
                 </a>
             </li>
