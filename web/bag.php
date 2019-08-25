@@ -108,8 +108,8 @@ if ($result = $db->query($sql)) {
                                             oninvalid="this.setCustomValidity('เลือกประเภทกระเป๋า')"
                                             oninput="this.setCustomValidity('')">
                                         <option value="" disabled selected>เลือกประเภทกระเป๋า</option>
-                                        <option value="0">กระเป๋าสะพาย</option>
-                                        <option value="1">กระเป๋าล้อลาก</option>
+                                        <option value="0">สะพาย</option>
+                                        <option value="1">ล้อลาก</option>
                                     </select>
                                 </div>
                             </div>
@@ -193,8 +193,8 @@ if ($result = $db->query($sql)) {
                                             oninvalid="this.setCustomValidity('เลือกประเภทกระเป๋า')"
                                             oninput="this.setCustomValidity('')">
                                         <option value="" disabled selected>เลือกประเภทกระเป๋า</option>
-                                        <option value="0">กระเป๋าสะพาย</option>
-                                        <option value="1">กระเป๋าล้อลาก</option>
+                                        <option value="0">สะพาย</option>
+                                        <option value="1">ล้อลาก</option>
                                     </select>
                                 </div>
                             </div>

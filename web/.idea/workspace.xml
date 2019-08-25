@@ -2,9 +2,47 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0b005d11-94f7-49e1-bff6-09c855a613b8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/ProhibitActivity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/model/Prohibit.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_cosmetics.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_danger.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_durian.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_fire.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_knife.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_magnet.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_power_bank.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_snake.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/prohibit_weapon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/drawable/prohibit.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_prohibit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/activity_prohibit_content.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_prohibit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/bagculate_bg.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ic_launcher.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ic_type_etc.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ic_type_pants.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ic_type_shirt.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ic_type_shoes.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/images/ic_type_thing.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MenuActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/java/th/ac/dusit/dbizcom/bagculate/MenuActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_air_asia.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_air_asia.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_bangkok_airways.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_bangkok_airways.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_jetasia_airways.png" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_jetasia_airways.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_newgen_airways.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_newgen_airways.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_nok_air.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_nok_air.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_nokscoot.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_nokscoot.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_thai_airways.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_thai_airways.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_thai_lion_air.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_thai_lion_air.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_thai_smile.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_thai_smile.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_thai_vietjet.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_thai_vietjet.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/drawable-xhdpi/airline_wisdom_airways.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/drawable-xxxhdpi/airline_wisdom_airways.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../app/src/main/res/layout/item_airline.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../app/src/main/res/layout/item_airline.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bag.php" beforeDir="false" afterPath="$PROJECT_DIR$/bag.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/sidebar.inc" beforeDir="false" afterPath="$PROJECT_DIR$/include/sidebar.inc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/login.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/object.php" beforeDir="false" afterPath="$PROJECT_DIR$/object.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -22,10 +60,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1PuGZxI3DQjp7cUSk1SmOVZ3Ytz" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/images" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -36,7 +76,11 @@
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/images" />
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
@@ -62,7 +106,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1566716626833</updated>
-      <workItem from="1566716628251" duration="9324000" />
+      <workItem from="1566716628251" duration="15830000" />
     </task>
     <servers />
   </component>

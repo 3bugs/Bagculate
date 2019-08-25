@@ -131,13 +131,16 @@ public class MenuActivity extends AppCompatActivity implements
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        Intent intent;
+
         switch (item.getItemId()) {
             case R.id.action_weight:
-                Intent intent = new Intent(MenuActivity.this, AirlinesWeightActivity.class);
+                intent = new Intent(MenuActivity.this, AirlinesWeightActivity.class);
                 startActivity(intent);
                 return true;
             case R.id.action_prohibit:
-
+                intent = new Intent(MenuActivity.this, ProhibitActivity.class);
+                startActivity(intent);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

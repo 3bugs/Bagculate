@@ -48,7 +48,10 @@ if ($result = $db->query($sql)) {
         <!-- DataTables -->
         <link rel="stylesheet" href="bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
         <style>
-
+            .object-image {
+                border-radius: 50%;
+                border: 1px solid black;
+            }
         </style>
     </head>
     <body class="hold-transition skin-blue sidebar-mini">
@@ -259,6 +262,7 @@ if ($result = $db->query($sql)) {
                                     <tr>
                                         <th style="width: 50%; text-align: center">ชื่อสิ่งของ</th>
                                         <th style="width: 30%; text-align: center">น้ำหนัก (กรัม)</th>
+                                        <th style="text-align: center" nowrap>&nbsp;</th>
                                         <th style="width: 20%; text-align: center">ประเภท</th>
                                         <th style="text-align: center" nowrap>จัดการ</th>
                                     </tr>
@@ -273,43 +277,58 @@ if ($result = $db->query($sql)) {
                                         <?php
                                     } else {
                                         foreach ($objectList as $object) {
-                                            $bagId = $object['id'];
-                                            $bagName = $object['name'];
-                                            $bagWeight = $object['weight'];
-                                            $bagType = $object['type'];
-                                            $bagTypeText = '';
-                                            switch ($bagType) {
+                                            $objectId = $object['id'];
+                                            $objectName = $object['name'];
+                                            $objectWeight = $object['weight'];
+                                            $objectType = $object['type'];
+                                            $objectTypeText = '';
+                                            $objectTypeImageFileName = '';
+                                            switch ($objectType) {
                                                 case 'shirt':
-                                                    $bagTypeText = 'เสื้อ';
+                                                    $objectTypeText = 'เสื้อ';
+                                                    $objectTypeImageFileName = 'ic_type_shirt.jpg';
                                                     break;
                                                 case 'pants':
-                                                    $bagTypeText = 'กางเกง';
+                                                    $objectTypeText = 'กางเกง';
+                                                    $objectTypeImageFileName = 'ic_type_pants.jpg';
                                                     break;
                                                 case 'shoes':
-                                                    $bagTypeText = 'รองเท้า';
+                                                    $objectTypeText = 'รองเท้า';
+                                                    $objectTypeImageFileName = 'ic_type_shoes.jpg';
                                                     break;
                                                 case 'thing':
-                                                    $bagTypeText = 'ของใช้';
+                                                    $objectTypeText = 'ของใช้';
+                                                    $objectTypeImageFileName = 'ic_type_thing.jpg';
                                                     break;
                                                 case 'etc':
-                                                    $bagTypeText = 'อื่นๆ';
+                                                    $objectTypeText = 'อื่นๆ';
+                                                    $objectTypeImageFileName = 'ic_type_etc.jpg';
                                                     break;
                                             }
                                             ?>
                                             <tr style="">
-                                                <td style="vertical-align: top; text-align: center"><?= $bagName; ?></td>
-                                                <td style="vertical-align: top; text-align: center"><?= $bagWeight; ?></td>
-                                                <td style="vertical-align: top; text-align: center"><?= $bagTypeText; ?></td>
+                                                <td style="vertical-align: top; text-align: center"><?= $objectName; ?></td>
+                                                <td style="vertical-align: top; text-align: center"><?= $objectWeight; ?></td>
+                                                <td style="vertical-align: top; text-align: center">
+                                                    <span style="display: none"><?= $objectTypeText; ?></span>
+                                                    <img src="images/<?= $objectTypeImageFileName; ?>"
+                                                         class="object-image"
+                                                         title="<?= $objectTypeText; ?>"
+                                                         alt="<?= $objectTypeText; ?>"
+                                                         height="50px"
+                                                         style="margin-left: 10px; margin-right: 10px"/>
+                                                </td>
+                                                <td style="vertical-align: top; text-align: center"><?= $objectTypeText; ?></td>
                                                 <td style="text-align: center" nowrap>
                                                     <button type="button" class="btn btn-warning"
                                                             style="margin-left: 6px; margin-right: 3px;"
-                                                            onclick="onClickEdit(this, <?= $bagId; ?>, '<?= $bagName; ?>', '<?= $bagWeight; ?>', '<?= $bagType; ?>')">
+                                                            onclick="onClickEdit(this, <?= $objectId; ?>, '<?= $objectName; ?>', '<?= $objectWeight; ?>', '<?= $objectType; ?>')">
                                                         <span class="fa fa-edit"></span>&nbsp;
                                                         แก้ไข
                                                     </button>
                                                     <button type="button" class="btn btn-danger"
                                                             style="margin-left: 3px; margin-right: 6px;"
-                                                            onclick="onClickDelete(this, <?= $bagId; ?>, '<?= $bagName; ?>', '<?= $bagWeight; ?>')">
+                                                            onclick="onClickDelete(this, <?= $objectId; ?>, '<?= $objectName; ?>', '<?= $objectWeight; ?>')">
                                                         <span class="fa fa-remove"></span>&nbsp;
                                                         ลบ
                                                     </button>

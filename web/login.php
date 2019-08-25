@@ -20,6 +20,13 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
 <html lang="th">
 <head>
     <?php require_once('include/head.inc'); ?>
+    <style>
+        body {
+            background: url(images/bagculate_bg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div>
@@ -30,7 +37,7 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
     }
     ?>
 
-    <h1 style="margin-top: 100px; text-align: center">Bagculate</h1>
+    <h1 style="margin-top: 100px; text-align: center; color: white">ระบบหลังบ้าน Bagculate</h1>
 
     <div id="loginbox" style="margin-top: 30px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
         <div class="panel panel-info">
@@ -39,10 +46,7 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
                 <!--<div style="float:right; font-size: 80%; position: relative; top:-10px"><a href="#">Forgot password?</a></div>-->
             </div>
 
-            <div style="padding-top:30px" class="panel-body">
-
-                <div style="display:none" id="login-alert" class="alert alert-danger col-sm-12"></div>
-
+            <div style="padding-top:30px;" class="panel-body">
                 <form id="loginForm" class="form-horizontal" role="form">
                     <div style="margin-bottom: 25px" class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
@@ -81,6 +85,8 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
                         </div>
                     </div>-->
                 </form>
+
+                <div style="display:none" id="alertLogin" class="alert alert-danger col-sm-12"></div>
             </div>
         </div>
     </div>
@@ -92,6 +98,10 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
 <script>
     $(document).ready(function () {
         $('#loginForm').submit(function (e) {
+            const alertLogin = $('#alertLogin');
+            alertLogin.text('');
+            alertLogin.hide();
+
             e.preventDefault();
             $.post(
                 'api/api.php/login_admin',
@@ -104,7 +114,10 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
                     if (data.login_success) {
                         window.location.href = "index.php";
                     } else {
-                        BootstrapDialog.show({
+                        alertLogin.text(data.error_message);
+                        alertLogin.show();
+
+                        /*BootstrapDialog.show({
                             title: 'Login',
                             message: data.error_message,
                             buttons: [{
@@ -113,10 +126,13 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
                                     self.close();
                                 }
                             }]
-                        });
+                        });*/
                     }
                 } else {
-                    BootstrapDialog.show({
+                    alertLogin.text(data.error_message);
+                    alertLogin.show();
+
+                    /*BootstrapDialog.show({
                         title: 'Login',
                         message: data.error_message,
                         buttons: [{
@@ -125,10 +141,13 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
                                 self.close();
                             }
                         }]
-                    });
+                    });*/
                 }
             }).fail(function () {
-                BootstrapDialog.show({
+                alertLogin.text('เกิดข้อผิดพลาดในการเชื่อมต่อ Server');
+                alertLogin.show();
+
+                /*BootstrapDialog.show({
                     title: 'Login',
                     message: 'เกิดข้อผิดพลาดในการเชื่อมต่อ Server',
                     buttons: [{
@@ -137,7 +156,7 @@ if (isset($_SESSION[KEY_SESSION_USER_ID])) {
                             self.close();
                         }
                     }]
-                });
+                });*/
             });
         });
     });

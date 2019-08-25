@@ -21,7 +21,11 @@ if (!isset($_SESSION[KEY_SESSION_USER_ID])) {
 <head>
     <?php require_once('include/head.inc'); ?>
     <style>
-
+        body {
+            background: url(images/bagculate_bg.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
     </style>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
@@ -132,8 +136,13 @@ if (!isset($_SESSION[KEY_SESSION_USER_ID])) {
                 ?>
                 <div style="text-align: center">
                     <!--<img src="images/ic_splash.png" width="300px">-->
-                    <div style="font-size: 60px; text-align: center; margin-top: 50px">
-                        ยินดีต้อนรับ <?php echo $_SESSION[KEY_SESSION_USER_USERNAME]; ?></div>
+                    <h1 style="text-align: center; margin-top: 50px; margin-bottom: 10px">
+                        ระบบหลังบ้าน Bagculate
+                    </h1>
+                    <h2 style="text-align: center; margin-bottom: 50px">
+                        ยินดีต้อนรับ <?php echo $_SESSION[KEY_SESSION_USER_USERNAME]; ?>
+                    </h2>
+                    <img src="images/ic_launcher.png"/>
                 </div>
                 <?php
             }

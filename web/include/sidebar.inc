@@ -6,12 +6,12 @@
         <ul class="sidebar-menu" data-widget="tree" style="margin-top: 10px">
             <li>
                 <a href="bag.php">
-                    <i class="fa fa-info-circle"></i> <span>กระเป๋าเดินทาง</span>
+                    <i class="fa fa-briefcase"></i> <span>กระเป๋าเดินทาง</span>
                 </a>
             </li>
             <li>
                 <a href="object.php">
-                    <i class="fa fa-retweet"></i> <span>สิ่งของ</span>
+                    <i class="fa fa-dropbox"></i> <span>สิ่งของ</span>
                 </a>
             </li>
         </ul>
